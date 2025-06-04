@@ -89,6 +89,10 @@ QuantUI is a modern desktop application that provides a flexible, customizable i
    wails dev
    ```
 
+   Go to : http://localhost:34115
+
+   
+
 2. Build the application:
    ```bash
    wails build

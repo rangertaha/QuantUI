@@ -1,4 +1,4 @@
-module tui
+module quantui
 
 go 1.23
 
