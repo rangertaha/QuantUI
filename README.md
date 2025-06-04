@@ -1,35 +1,54 @@
 # QuantUI
 
-QuantUI is a modern desktop application built with Wails (Go + Web Technologies) that provides a dynamically generated user interface for monitoring real-time metrics and executing custom actions.
+QuantUI is a modern desktop application that provides a flexible, customizable interface for algorithmic trading systems. Built with Wails (Go + ReactJs), it enables traders and developers to create, monitor, and control their trading strategies through a dynamic, real-time interface.
 
-## Features
+## Key Features
 
+### Trading-Specific Features
+- Real-time market data visualization and monitoring
+- Dynamic strategy parameter controls
+- Order management and execution interface
+- Position and portfolio tracking
+- Custom trading action triggers
+- Strategy performance metrics dashboard
+
+### Technical Features
+- Dynamic UI generation based on strategy specifications
 - Real-time metric monitoring and visualization
-- Dynamic UI generation based on specifications
-- Custom action execution
-- NATS integration for backend communication
+- Custom action execution framework
+- NATS integration for high-performance messaging
 - Modern, responsive user interface
 - Cross-platform support (Windows, macOS, Linux)
 
 ## Technology Stack
 
 ### Frontend
-- React 18
-- TypeScript
-- Vite for build tooling
-- Modern CSS features
+- React 18 with TypeScript
+- Vite for fast development and building
+- Modern CSS with responsive design
+- Real-time data visualization libraries
 
 ### Backend
-- Go 1.23+
-- Wails v2 framework
-- NATS messaging system
+- Go 1.23+ for high-performance trading operations
+- Wails v2 framework for desktop integration
+- NATS messaging system for real-time communication
+- Custom trading strategy integration framework
 
 ## Architecture
 
 - **Frontend**: ReactJS (HTML, CSS, TypeScript)
+  - Dynamic component generation
+  - Real-time data updates
+  - Custom trading controls
 - **Backend**: Go with Wails framework
+  - Market data processing
 - **Communication**: Embedded or external NATS messaging service
+  - High-performance message passing
+  - Real-time data streaming
+  - Event-driven architecture
 - **UI Framework**: Custom dynamic UI generation
+  - Custom actions
+  - Real-time data visualization
 
 ## Prerequisites
 
@@ -38,7 +57,7 @@ QuantUI is a modern desktop application built with Wails (Go + Web Technologies)
 - NATS server (optional, for production)
 - Wails CLI (`go install github.com/wailsapp/wails/v2/cmd/wails@latest`)
 
-## Installation
+## Quick Start
 
 1. Clone the repository:
    ```bash
@@ -57,8 +76,14 @@ QuantUI is a modern desktop application built with Wails (Go + Web Technologies)
    cd ..
    ```
 
+3. Start development:
+   ```bash
+   wails dev
+   ```
+
 ## Development
 
+### Local Development
 1. Start the development server:
    ```bash
    wails dev
@@ -69,21 +94,17 @@ QuantUI is a modern desktop application built with Wails (Go + Web Technologies)
    wails build
    ```
 
-## Testing
-
+### Testing
 Run the test suite:
 ```bash
 go test ./...
 ```
 
-## Building
-
-To create a production build:
-
+### Build
+Create a production build:
 ```bash
 wails build -production
 ```
-
 The built application will be available in the `build/bin` directory.
 
 ## Project Structure
@@ -92,11 +113,14 @@ The built application will be available in the `build/bin` directory.
 QuantUI/
 ├── frontend/           # React frontend application
 │   ├── src/           # Source files
+│   │   ├── components/  # UI components
+│   │   ├── pages/      # Page components
+│   │   └── utils/      # Utility functions
 │   ├── dist/          # Built frontend files
 │   └── package.json   # Frontend dependencies
 ├── main.go            # Application entry point
 ├── app.go             # Main application logic
-└── wails.json         # Wails configuration
+└── wails.json        # Wails configuration
 ```
 
 ## Configuration
