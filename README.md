@@ -17,16 +17,18 @@ QuantUI is a modern desktop application that provides a flexible, customizable i
 - Real-time metric monitoring and visualization
 - Custom action execution framework
 - NATS integration for high-performance messaging
-- Modern, responsive user interface
+- Modern, responsive user interface with Material Design
 - Cross-platform support (Windows, macOS, Linux)
 
 ## Technology Stack
 
 ### Frontend
 - React 18 with TypeScript
+- Material UI (MUI) for modern, consistent design
 - Vite for fast development and building
 - Modern CSS with responsive design
 - Real-time data visualization libraries
+- MUI Data Grid for advanced data tables
 
 ### Backend
 - Go 1.23+ for high-performance trading operations
@@ -36,10 +38,12 @@ QuantUI is a modern desktop application that provides a flexible, customizable i
 
 ## Architecture
 
-- **Frontend**: ReactJS (HTML, CSS, TypeScript)
+- **Frontend**: ReactJS with Material UI
   - Dynamic component generation
   - Real-time data updates
   - Custom trading controls
+  - Material Design components
+  - Responsive layouts
 - **Backend**: Go with Wails framework
   - Market data processing
 - **Communication**: Embedded or external NATS messaging service
@@ -49,6 +53,7 @@ QuantUI is a modern desktop application that provides a flexible, customizable i
 - **UI Framework**: Custom dynamic UI generation
   - Custom actions
   - Real-time data visualization
+  - Material Design theming
 
 ## Prerequisites
 

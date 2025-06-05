@@ -1,28 +1,43 @@
-import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
-import './App.css';
-import {Greet} from "../wailsjs/go/main/App";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme';
+import Layout from './components/Layout';
+import LoginOverlay from './components/overlays/Login';
+import Dashboard from './pages/Dashboard';
+import Bots from './pages/Bots';
+import Orders from './pages/Orders';
+import Accounts from './pages/Accounts';
+import Prices from './pages/Prices';
+import Settings from './pages/Settings';
+import Profile from './pages/Profile';
+import { useState } from 'react';
 
-function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: string) => setResultText(result);
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    function greet() {
-        Greet(name).then(updateResultText);
-    }
-
+  if (!isLoggedIn) {
     return (
-        <div id="App">
-            <img src={logo} id="logo" alt="logo"/>
-            <div id="result" className="result">{resultText}</div>
-            <div id="input" className="input-box">
-                <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                <button className="btn" onClick={greet}>Greet</button>
-            </div>
-        </div>
-    )
-}
+      <ThemeProvider theme={theme}>
+        <LoginOverlay onLogin={() => setIsLoggedIn(true)} />
+      </ThemeProvider>
+    );
+  }
 
-export default App
+  return (
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/bots" element={<Bots />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/accounts" element={<Accounts />} />
+            <Route path="/prices" element={<Prices />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Layout>
+      </ThemeProvider>
+    </Router>
+  );
+}
