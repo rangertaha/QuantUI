@@ -266,7 +266,7 @@ export default function Layout({ children }: LayoutProps) {
                 '&:hover': {
                   backgroundColor: alpha(theme.palette.common.white, 0.05),
                 },
-                marginRight: 1,
+                marginRight: 0,
                 marginLeft: 0,
                 width: '100%',
                 [theme.breakpoints.up('sm')]: {
@@ -509,69 +509,58 @@ export default function Layout({ children }: LayoutProps) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 0,
-          m: 0,
-          width: { sm: `calc(100% - ${isCollapsed ? miniDrawerWidth : drawerWidth}px)` },
-          ml: 0,
-          transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          }),
-          minHeight: '100vh',
-          minWidth: '100vw',
-          backgroundColor: theme.palette.background.default,
+          height: '100vh',
+          overflow: 'auto',
           display: 'flex',
           flexDirection: 'column',
-          overflow: 'hidden',
+          position: 'relative',
+          pb: '24px'
         }}
       >
-        <Toolbar sx={{ minHeight: '64px !important', m: 0, p: 0 }} />
-        <Box sx={{ 
-          flexGrow: 1, 
-          display: 'flex', 
-          flexDirection: 'column',
-          m: 0,
-          p: 0,
-          width: '100%',
-          height: '100%',
-          overflow: 'hidden',
-        }}>
+        <Box sx={{ flex: 0, p: 0 }}>
           {children}
         </Box>
-        {/* Status Bar */}
         <Box
           sx={{
             height: '24px',
-            borderTop: `1px solid ${theme.palette.divider}`,
-            backgroundColor: theme.palette.background.paper,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+            bgcolor: 'background.paper',
             display: 'flex',
             alignItems: 'center',
             px: 2,
+            position: 'fixed',
+            bottom: 0,
+            left: { sm: `${miniDrawerWidth}px` },
+            right: 0,
+            zIndex: theme.zIndex.appBar,
             fontSize: '0.75rem',
-            color: theme.palette.text.secondary,
+            color: 'text.secondary',
+            transition: theme.transitions.create(['left'], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.leavingScreen,
+            }),
           }}
         >
-          <Box sx={{ display: 'flex', gap: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
               <Box
                 sx={{
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  backgroundColor: 'success.main',
+                  bgcolor: 'success.main',
+                  mr: 0.5
                 }}
               />
-              <Typography variant="caption">System Online</Typography>
+              System Online
             </Box>
-            <Typography variant="caption">Last Update: {new Date().toLocaleTimeString()}</Typography>
-            <Typography variant="caption">API Status: Connected</Typography>
-            <Typography variant="caption">Version: 1.0.0</Typography>
-          </Box>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: 'flex', gap: 3 }}>
-            <Typography variant="caption">Memory: 256MB / 1GB</Typography>
-            <Typography variant="caption">CPU: 12%</Typography>
-            <Typography variant="caption">Network: 1.2MB/s</Typography>
+            <Box>Last Update: {new Date().toLocaleTimeString()}</Box>
+            <Box>API: Connected</Box>
+            <Box>Version: 1.0.0</Box>
+            <Box>Memory: 256MB / 1GB</Box>
+            <Box>CPU: 12%</Box>
+            <Box>Network: 1.2MB/s</Box>
           </Box>
         </Box>
       </Box>

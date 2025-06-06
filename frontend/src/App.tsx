@@ -1,5 +1,7 @@
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { theme } from './theme';
 import Layout from './components/Layout';
 import LoginOverlay from './components/overlays/Login';
@@ -11,13 +13,24 @@ import Prices from './pages/Prices';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import { useState } from 'react';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { getFontSize } from './utils/fontSize';
 
-export default function App() {
+const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useKeyboardShortcuts();
+
+  useEffect(() => {
+    // Initialize font size from localStorage
+    const fontSize = getFontSize();
+    document.documentElement.style.fontSize = `${fontSize}px`;
+  }, []);
 
   if (!isLoggedIn) {
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <LoginOverlay onLogin={() => setIsLoggedIn(true)} />
       </ThemeProvider>
     );
@@ -26,6 +39,7 @@ export default function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -40,4 +54,6 @@ export default function App() {
       </ThemeProvider>
     </Router>
   );
-}
+};
+
+export default App;
