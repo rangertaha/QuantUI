@@ -1,6 +1,11 @@
 # Hyperio
 
+
 Hyperio is a modern desktop application that provides a flexible, customizable interface for algorithmic trading systems. Built with Wails (Go + ReactJs), it enables traders and developers to create, monitor, and control their trading strategies through a dynamic, real-time interface.
+
+Hyperio is derived from Hyperion of Greek mythology. He was one of the twelve Titans and was regarded as the god of observation.
+
+
 
 ## Key Features
 
@@ -94,7 +99,7 @@ Hyperio is a modern desktop application that provides a flexible, customizable i
    wails dev
    ```
 
-   Go to : http://localhost:34115
+   The application will be available at: http://localhost:34115
 
    
 
