@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { theme } from './theme';
+import cyberpunkTheme from './theme';
 import Layout from './components/Layout';
 import LoginOverlay from './components/overlays/Login';
 import Dashboard from './pages/Dashboard';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
 
   if (!isLoggedIn) {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={cyberpunkTheme}>
         <CssBaseline />
         <LoginOverlay onLogin={() => setIsLoggedIn(true)} />
       </ThemeProvider>
@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={cyberpunkTheme}>
         <CssBaseline />
         <Layout>
           <Routes>

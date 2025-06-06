@@ -158,7 +158,7 @@ export default function Layout({ children }: LayoutProps) {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <QuantIcon color="primary" />
             <Typography variant="h6" noWrap component="div">
-              QuantUI
+              Hyperio
             </Typography>
           </Box>
         )}

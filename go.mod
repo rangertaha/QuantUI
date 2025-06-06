@@ -1,4 +1,4 @@
-module quantui
+module hyperio
 
 go 1.23
 

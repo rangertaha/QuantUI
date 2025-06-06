@@ -44,7 +44,7 @@ export default function Config({ onLogin }: LoginOverlayProps) {
         }}
       >
         <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>
-          Login to QuantUI
+          Login to Hyperio
         </Typography>
         <TextField
           label="Username"

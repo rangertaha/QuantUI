@@ -81,7 +81,13 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
           variant="body2"
           sx={{ 
             cursor: 'pointer',
-            '&:hover': { color: 'primary.main' }
+            fontWeight: 600,
+            color: '#ffffff',
+            fontFamily: 'monospace',
+            '&:hover': { 
+              color: '#87ceeb',
+              textShadow: '0 0 10px rgba(135, 206, 235, 0.5)',
+            }
           }}
         >
           {params.value}
@@ -94,22 +100,25 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       width: 120,
       renderCell: (params: GridRenderCellParams) => {
         const status = params.value as string;
-        const color = status === 'active' ? 'success.main' : 
-                     status === 'paused' ? 'warning.main' : 'error.main';
+        const color = status === 'active' ? '#4caf50' : 
+                     status === 'paused' ? '#b0e0e6' : '#ff6b6b';
         return (
-          <Typography
-            variant="body2"
+          <Chip
+            label={status}
+            size="small"
             sx={{
+              bgcolor: 'transparent',
               color,
-              fontWeight: 500,
+              fontWeight: 600,
               textTransform: 'capitalize',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.5
+              height: '20px',
+              '& .MuiChip-label': {
+                px: 1,
+                fontSize: '0.75rem',
+                fontFamily: 'monospace',
+              },
             }}
-          >
-            {status}
-          </Typography>
+          />
         );
       },
     },
@@ -118,6 +127,19 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       headerName: 'STRATEGY',
       flex: 1,
       minWidth: 150,
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography
+          variant="body2"
+          sx={{
+            color: '#87ceeb',
+            fontWeight: 500,
+            fontFamily: 'monospace',
+            fontSize: '0.8125rem',
+          }}
+        >
+          {params.value}
+        </Typography>
+      ),
     },
     {
       field: 'dailyPerformance',
@@ -126,8 +148,12 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       valueGetter: (params) => params.row.performance.daily,
       renderCell: (params: GridRenderCellParams) => (
         <Typography
-          color={params.value >= 0 ? 'success.main' : 'error.main'}
-          sx={{ fontSize: '0.875rem' }}
+          sx={{
+            color: params.value >= 0 ? '#87ceeb' : '#ff6b6b',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            fontFamily: 'monospace',
+          }}
         >
           {params.value >= 0 ? '+' : ''}{params.value}%
         </Typography>
@@ -140,8 +166,12 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       valueGetter: (params) => params.row.performance.weekly,
       renderCell: (params: GridRenderCellParams) => (
         <Typography
-          color={params.value >= 0 ? 'success.main' : 'error.main'}
-          sx={{ fontSize: '0.875rem' }}
+          sx={{
+            color: params.value >= 0 ? '#87ceeb' : '#ff6b6b',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            fontFamily: 'monospace',
+          }}
         >
           {params.value >= 0 ? '+' : ''}{params.value}%
         </Typography>
@@ -154,8 +184,12 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       valueGetter: (params) => params.row.performance.monthly,
       renderCell: (params: GridRenderCellParams) => (
         <Typography
-          color={params.value >= 0 ? 'success.main' : 'error.main'}
-          sx={{ fontSize: '0.875rem' }}
+          sx={{
+            color: params.value >= 0 ? '#87ceeb' : '#ff6b6b',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            fontFamily: 'monospace',
+          }}
         >
           {params.value >= 0 ? '+' : ''}{params.value}%
         </Typography>
@@ -166,6 +200,18 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       headerName: 'TRADES',
       width: 120,
       valueGetter: (params) => `${params.row.trades.total} (${params.row.trades.win}/${params.row.trades.loss})`,
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography
+          sx={{
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            fontFamily: 'monospace',
+            color: '#87ceeb',
+          }}
+        >
+          {params.value}
+        </Typography>
+      ),
     },
     {
       field: 'balance',
@@ -173,7 +219,14 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       minWidth: 80,
       valueGetter: (params) => params.row.balance,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography sx={{ fontSize: '0.875rem' }}>
+        <Typography
+          sx={{
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            fontFamily: 'monospace',
+            color: '#ffffff',
+          }}
+        >
           ${params.value.toLocaleString()}
         </Typography>
       ),
@@ -188,6 +241,14 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
           <IconButton
             size="small"
             onClick={(e) => handleActionClick(e, params.row as Bot)}
+            sx={{
+              color: '#87ceeb',
+              '&:hover': {
+                color: '#ffffff',
+                bgcolor: 'rgba(135, 206, 235, 0.1)',
+                boxShadow: '0 0 10px rgba(135, 206, 235, 0.3)',
+              },
+            }}
           >
             <MoreVertIcon fontSize="small" />
           </IconButton>
@@ -204,15 +265,20 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       '& .MuiDataGrid-root': {
         border: 'none',
         height: '100%',
+        bgcolor: 'rgba(0, 0, 0, 0.8)',
+        '& .MuiDataGrid-main': {
+          bgcolor: 'rgba(0, 0, 0, 0.9)',
+        },
       },
       '& .MuiDataGrid-row': {
-        minHeight: '32px !important',
+        minHeight: '28px !important',
+        maxHeight: '28px !important',
         borderBottom: '1px solid',
-        borderColor: 'divider',
-        transition: 'all 0.15s ease-in-out',
+        borderColor: 'rgba(135, 206, 235, 0.1)',
+        transition: 'all 0.2s ease-in-out',
         position: 'relative',
         '&:hover': {
-          bgcolor: 'action.hover',
+          bgcolor: 'rgba(135, 206, 235, 0.02)',
           cursor: 'pointer',
           '&::before': {
             content: '""',
@@ -220,82 +286,81 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
             left: 0,
             top: 0,
             bottom: 0,
-            width: '3px',
-            bgcolor: 'primary.main',
-          },
-          '& .MuiDataGrid-cell': {
-            bgcolor: 'action.hover',
+            width: '2px',
+            bgcolor: '#87ceeb',
+            boxShadow: '0 0 10px rgba(135, 206, 235, 0.3), 0 0 20px rgba(135, 206, 235, 0.1)',
           },
         },
         '&.Mui-selected': {
-          bgcolor: 'action.selected',
+          bgcolor: 'rgba(135, 206, 235, 0.05)',
           '&::before': {
             content: '""',
             position: 'absolute',
             left: 0,
             top: 0,
             bottom: 0,
-            width: '3px',
-            bgcolor: 'primary.main',
+            width: '2px',
+            bgcolor: '#87ceeb',
+            boxShadow: '0 0 10px rgba(135, 206, 235, 0.3), 0 0 20px rgba(135, 206, 235, 0.1)',
           },
           '&:hover': {
-            bgcolor: 'action.selected',
-            '& .MuiDataGrid-cell': {
-              bgcolor: 'action.selected',
-            },
+            bgcolor: 'rgba(135, 206, 235, 0.08)',
           },
         },
         '&:nth-of-type(odd)': {
-          bgcolor: 'background.default',
+          bgcolor: 'rgba(0, 0, 0, 0.8)',
         },
         '&:nth-of-type(even)': {
-          bgcolor: 'background.paper',
+          bgcolor: 'rgba(0, 0, 0, 0.9)',
         },
       },
       '& .MuiDataGrid-cell': {
-        borderColor: 'divider',
+        borderColor: 'transparent',
         py: 0,
-        px: 1.5,
-        fontSize: '0.875rem',
+        px: 1,
+        fontSize: '0.8125rem',
         fontWeight: 500,
-        transition: 'background-color 0.15s ease-in-out',
+        color: '#e0e0e0',
+        transition: 'all 0.2s ease-in-out',
         '&:focus': {
           outline: 'none',
         },
         '&.MuiDataGrid-cell--editing': {
-          bgcolor: 'action.selected',
+          bgcolor: 'transparent',
         },
       },
       '& .MuiDataGrid-columnHeader': {
-        borderColor: 'divider',
+        borderColor: 'rgba(135, 206, 235, 0.1)',
         py: 0,
-        px: 1.5,
-        bgcolor: 'background.default',
+        px: 1,
+        bgcolor: 'rgba(1, 16, 30, 0.95)',
         fontSize: '0.75rem',
         fontWeight: 600,
         textTransform: 'uppercase',
-        letterSpacing: '0.5px',
-        color: 'text.secondary',
+        letterSpacing: '1px',
+        color: '#87ceeb',
         '&:focus': {
           outline: 'none',
         },
         '&:hover': {
-          bgcolor: 'action.hover',
+          bgcolor: 'rgba(135, 206, 235, 0.05)',
         },
       },
       '& .MuiDataGrid-columnHeaders': {
         borderBottom: '2px solid',
-        borderColor: 'divider',
-        minHeight: '40px !important',
-        bgcolor: 'background.default',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+        borderColor: '#87ceeb',
+        minHeight: '32px !important',
+        maxHeight: '32px !important',
+        bgcolor: 'rgba(1, 16, 30, 0.95)',
+        boxShadow: '0 0 10px rgba(135, 206, 235, 0.2)',
       },
       '& .MuiDataGrid-footerContainer': {
         borderTop: '2px solid',
-        borderColor: 'divider',
-        minHeight: '40px !important',
-        bgcolor: 'background.default',
-        boxShadow: '0 -2px 4px rgba(0,0,0,0.05)',
+        borderColor: '#87ceeb',
+        minHeight: '32px !important',
+        maxHeight: '32px !important',
+        bgcolor: 'rgba(1, 16, 30, 0.95)',
+        boxShadow: '0 0 10px rgba(135, 206, 235, 0.2)',
       },
       '& .MuiDataGrid-virtualScroller': {
         '& .MuiDataGrid-virtualScrollerContent': {
@@ -316,12 +381,35 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
       },
       '& .MuiDataGrid-pagination': {
         fontSize: '0.75rem',
+        color: '#e0e0e0',
         '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
           fontSize: '0.75rem',
+          color: '#e0e0e0',
+        },
+        '& .MuiTablePagination-select': {
+          color: '#87ceeb',
+        },
+        '& .MuiTablePagination-selectIcon': {
+          color: '#87ceeb',
         },
       },
       '& .MuiDataGrid-selectedRowCount': {
         visibility: 'hidden',
+      },
+      '& .MuiDataGrid-menuIcon': {
+        color: '#87ceeb',
+        '&:hover': {
+          color: '#ffffff',
+        },
+      },
+      '& .MuiDataGrid-sortIcon': {
+        color: '#87ceeb',
+      },
+      '& .MuiDataGrid-filterIcon': {
+        color: '#87ceeb',
+        '&:hover': {
+          color: '#ffffff',
+        },
       },
     }}>
       <DataGrid
@@ -331,7 +419,7 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
         onRowClick={(params) => onBotSelect(params.row)}
         loading={loading}
         disableRowSelectionOnClick
-        density="standard"
+        density="compact"
         initialState={{
           pagination: {
             paginationModel: { pageSize: 15, page: 0 },
@@ -342,7 +430,22 @@ const ListView: React.FC<ListViewProps> = ({ bots, onBotSelect, onAction, loadin
           '& .MuiDataGrid-pagination': {
             fontSize: '0.75rem',
           },
+          '& .MuiDataGrid-row': {
+            '&[data-status="stopped"]': {
+              bgcolor: 'rgba(255, 107, 107, 0.05) !important',
+              '&:hover': {
+                bgcolor: 'rgba(255, 107, 107, 0.08) !important',
+              },
+              '&.Mui-selected': {
+                bgcolor: 'rgba(255, 107, 107, 0.1) !important',
+                '&:hover': {
+                  bgcolor: 'rgba(255, 107, 107, 0.15) !important',
+                },
+              },
+            },
+          },
         }}
+        getRowClassName={(params) => `status-${params.row.status}`}
       />
       {actionMenuAnchor && (
         <Menu

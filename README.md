@@ -1,6 +1,6 @@
-# QuantUI
+# Hyperio
 
-QuantUI is a modern desktop application that provides a flexible, customizable interface for algorithmic trading systems. Built with Wails (Go + ReactJs), it enables traders and developers to create, monitor, and control their trading strategies through a dynamic, real-time interface.
+Hyperio is a modern desktop application that provides a flexible, customizable interface for algorithmic trading systems. Built with Wails (Go + ReactJs), it enables traders and developers to create, monitor, and control their trading strategies through a dynamic, real-time interface.
 
 ## Key Features
 
@@ -66,8 +66,8 @@ QuantUI is a modern desktop application that provides a flexible, customizable i
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rangertaha/QuantUI.git
-   cd QuantUI
+   git clone https://github.com/rangertaha/Hyperio.git
+   cd Hyperio
    ```
 
 2. Install dependencies:
@@ -119,7 +119,7 @@ The built application will be available in the `build/bin` directory.
 ## Project Structure
 
 ```
-QuantUI/
+Hyperio/
 ├── frontend/           # React frontend application
 │   ├── src/           # Source files
 │   │   ├── components/  # UI components
